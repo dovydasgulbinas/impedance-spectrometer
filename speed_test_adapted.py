@@ -14,13 +14,19 @@ app = QtGui.QApplication([])
 
 p = pg.plot()
 p.setWindowTitle('pyqtgraph example: PlotSpeedTest')
+# TODO: Investigate http://pyqtgraph.org/documentation/widgets/plotwidget.html
 p.setRange(QtCore.QRectF(0, -10, 5000, 20))
+
 
 
 # My edit
 p.showGrid(True, True)
 p.setLabel('bottom', text='Voltage', units='V')
 p.setLabel('left', text='Current', units='A')
+# --
+from basic_iterator import SineIterable
+sin_data = SineIterable(0,20)
+
 # end my edit
 
 # visual plot data you pass in args here
@@ -41,7 +47,10 @@ def update():
 
     # p.plot().setData() -- sets data that will be plotted
     # TODO: Inject sensor data here:
-    curve.setData(data[ptr % 10])
+    #curve.setData(data[ptr % 10])
+
+    # itterated on demmand
+    curve.setData([y for y in sin_data])
     # END
 
     ptr += 1

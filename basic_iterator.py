@@ -8,7 +8,7 @@ class SineIterable(object):
 
     def __iter__(self):
         for x in self.xrange:
-            yield math.sin(x) + random.random() * 0.5
+            yield math.sin(x) + random.random() * 1.0
             #yield random.random()
 
 
@@ -18,8 +18,6 @@ if __name__ == '__main__':
 
     for y in iter_sine:
         print(y)
-
-
 
     sins = [y for y in iter_sine]
 
