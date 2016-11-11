@@ -1,11 +1,21 @@
+# About
+
+[documentation](http://www.pyqtgraph.org/documentation/graphicsItems/plotitem.html#pyqtgraph.PlotItem.showGrid)
+
+## Running
+
+1. Install virtual env: ``
+2. Activate env: `source activate qt4qtgraph`
 
 
-# Installing dependacies
+## Conclusions on this lib
 
-## Easy installation guide:
+- Its a really fast-lib that has potencial
+- It has dynamic zooming
+- I can steall from `Flowchar.py PlotSpeedTest.py plotAutoRange.py ScrollingPlot.py LinkedViews.py MultiplePlots.py`
+- Lib is good for science projects
+- lib has EZ to read documentation
 
-1. Install `miniconda`
-2. Create `miniconda` virtual enviroment
-3. Or just use dependacy file
+
 
  
