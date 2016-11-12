@@ -47,10 +47,10 @@ def update():
 
     # p.plot().setData() -- sets data that will be plotted
     # TODO: Inject sensor data here:
-    #curve.setData(data[ptr % 10])
+    curve.setData(data[ptr % 10])
 
     # itterated on demmand
-    curve.setData([y for y in sin_data])
+    # curve.setData([y for y in sin_data])
     # END
 
     ptr += 1
