@@ -17,5 +17,8 @@
 - lib has EZ to read documentation
 
 
-
- 
+## Installing editor tools
+```
+apt-get install pyqt4-dev-tools
+pyuic4 -x xxx.ui -o yyy.py
+```
