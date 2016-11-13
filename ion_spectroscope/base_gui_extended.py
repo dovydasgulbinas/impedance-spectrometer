@@ -1,7 +1,7 @@
 from PyQt4 import QtCore, QtGui
 from base_gui import Ui_MainWindow
 from basic_iterator import SineIterable
-
+import time
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -26,8 +26,9 @@ class DataSignals(QtCore.QObject):
     def value_generator(self):
         # will generate event that will passed
         si = SineIterable(0, 200)
-        for i in range(0,2):
+        for i in range(0,1000):
             self.value_updated.emit(list(si))
+            time.sleep(0.01)
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -45,11 +46,22 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def customize_left_plot(self):
         self.plot_left.showGrid(True, True)
         self.plot_left.setTitle('Left is not left ?')
+        # this returns one instance of a graph plotted in left_plot
+        self.graph_l0 = self.plot_left.plot()
 
     def handle_value_updated(self, value):
         # plot method takes in lists!
-        self.plot_left.plot().setData(value)
+        self.graph_l0.setData(value)
         print(value)
+        # essential line for updating
+        QtGui.qApp.processEvents() # force complete redraw for every plot
+
+    def temp_plot_always(self):
+        # plot method takes in lists!
+        value = list(SineIterable(0, 200))
+        self.graph_l0.setData(value)
+        print(value)
+        self.plot_left.setTitle(value)
         # essential line for updating
         QtGui.qApp.processEvents() # force complete redraw for every plot
 
@@ -59,6 +71,12 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     window = MainWindow()
     window.show()
+
+    # timer = QtCore.QTimer()
+    # # attach method that will be called as fast as possible
+    # timer.timeout.connect(window.temp_plot_always)
+    # timer.start(2000)
+
     window.data_signals.value_generator()
     # this line is not executed
     sys.exit(app.exec_())
