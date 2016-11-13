@@ -29,8 +29,17 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def __init__(self):
-        pass
+    def __init__(self, plot_wid):
+        self.plot_wid = plot_wid
+
+    @property
+    def plot_wid(self):
+        return self._plot_wid
+
+    @plot_wid.setter
+    def plot_wid(self, plot):
+        if not plot: ValueError("Widget object is None")
+        self._plot_wid = plot
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -44,7 +53,7 @@ class Ui_MainWindow(object):
         # we must override this widget
         # --
         # self.plot_wid = QtGui.QWidget(self.container_wid)
-        self.plot_wid = pg.PlotWidget()
+        # self.plot_wid =
         # --
         self.plot_wid.setObjectName(_fromUtf8("plot_wid"))
         self.gridLayout.addWidget(self.plot_wid, 0, 0, 1, 1)
@@ -84,10 +93,26 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
+
+    # We pass an object of plot widget to our class
+    ui = Ui_MainWindow(pg.PlotWidget())
+
+
     ui.setupUi(MainWindow)
     MainWindow.show()
+    print("Im running?")
+    # -- Customization starts here:
+
+    # acessing grid attributes here!
+    ui.plot_wid.showGrid(True, True)
+    # --
+
+
+
+
+
     sys.exit(app.exec_())
 
