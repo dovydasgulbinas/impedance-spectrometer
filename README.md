@@ -1,7 +1,3 @@
-# About
-
-[documentation](http://www.pyqtgraph.org/documentation/graphicsItems/plotitem.html#pyqtgraph.PlotItem.showGrid)
-
 ## Running
 
 1. Install virtual env from file: ``
@@ -22,3 +18,8 @@
 apt-get install pyqt4-dev-tools
 pyuic4 -x xxx.ui -o yyy.py
 ```
+
+## References
+[redraw_events](http://stackoverflow.com/questions/20873259/pyqt-how-to-dynamically-update-widget-property-on-outer-variable-value-change)
+
+[documentation](http://www.pyqtgraph.org/documentation/graphicsItems/plotitem.html#pyqtgraph.PlotItem.showGrid)
