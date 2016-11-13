@@ -10,8 +10,8 @@
 from PyQt4 import QtCore, QtGui
 import pyqtgraph as pg
 
-# here we use our plot widget
-# plot = pg.PlotWidget()
+from basic_iterator import SineIterable
+sin_data = SineIterable(0,20)
 
 
 try:
@@ -28,6 +28,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+# FIXME: i should extend this module rather than edit it
 class Ui_MainWindow(object):
     def __init__(self, plot_wid):
         self.plot_wid = plot_wid
@@ -55,6 +56,7 @@ class Ui_MainWindow(object):
         # self.plot_wid = QtGui.QWidget(self.container_wid)
         # self.plot_wid =
         # --
+        # FIXME: Override setup UI in child class make sure you copy the parameter values
         self.plot_wid.setObjectName(_fromUtf8("plot_wid"))
         self.gridLayout.addWidget(self.plot_wid, 0, 0, 1, 1)
 
@@ -90,6 +92,19 @@ class Ui_MainWindow(object):
         self.menuSystem.setTitle(_translate("MainWindow", "System", None))
         self.menuTools.setTitle(_translate("MainWindow", "Tools", None))
 
+# adding redraw functionality
+def update_plot():
+    # plot object : pg.plotWidget -> curve : pg.plotWidget.plot() -> graph : pg.plotWidget.plot().setData()
+    global ui
+    print('IM CALLED!')
+    ui.plot_wid.plot().setData([y for y in sin_data])
+
+    app.processEvents() # force complete redraw for every plot
+
+
+timer = QtCore.QTimer()
+timer.timeout.connect(update_plot)
+timer.start(200)
 
 if __name__ == "__main__":
     import sys
@@ -108,10 +123,9 @@ if __name__ == "__main__":
 
     # acessing grid attributes here!
     ui.plot_wid.showGrid(True, True)
-    # --
 
-
-
+    if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
+        QtGui.QApplication.instance().exec_()
 
 
     sys.exit(app.exec_())
