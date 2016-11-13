@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from base_gui import Ui_MainWindow
-from pyqtgraph import PlotWidget
+from basic_iterator import SineIterable
 
 
 try:
@@ -19,12 +19,15 @@ except AttributeError:
 
 class DataSignals(QtCore.QObject):
     """All data that must be processed in real time and updated is added here"""
-    value_updated = QtCore.pyqtSignal(int)
+    # Python specific type -- list
+    value_updated = QtCore.pyqtSignal(list)
+
 
     def value_generator(self):
-        for i in range(10000):
-            # will generate event that will passed
-            self.value_updated.emit(i)
+        # will generate event that will passed
+        si = SineIterable(0, 200)
+        for i in range(0,2):
+            self.value_updated.emit(list(si))
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -33,6 +36,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         # Since MainWindow class is inherited you must pass self
         self.setupUi(self)
         self.customize_left_plot()
+
         # -- Data refresh configuration
         # Must use self!
         self.data_signals = DataSignals(self)
@@ -43,10 +47,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.plot_left.setTitle('Left is not left ?')
 
     def handle_value_updated(self, value):
-        self.plot_left.setTitle(str(value))
+        # plot method takes in lists!
+        self.plot_left.plot().setData(value)
         print(value)
         # essential line for updating
-        QtGui.qApp.processEvents()
+        QtGui.qApp.processEvents() # force complete redraw for every plot
 
 
 if __name__ == "__main__":
@@ -54,7 +59,7 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     window = MainWindow()
     window.show()
-
     window.data_signals.value_generator()
-
+    # this line is not executed
     sys.exit(app.exec_())
+

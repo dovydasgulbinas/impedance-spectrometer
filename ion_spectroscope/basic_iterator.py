@@ -11,6 +11,8 @@ class SineIterable(object):
 
 
 
+
+
 if __name__ == '__main__':
     iter_sine = SineIterable(0,200)
 
