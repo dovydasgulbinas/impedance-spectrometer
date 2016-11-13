@@ -17,6 +17,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class Ui_CustomisedPlots(Ui_MainWindow):
     def __init__(self):
         # initializes objects in parent class

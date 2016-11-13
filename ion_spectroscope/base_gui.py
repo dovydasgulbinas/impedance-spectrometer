@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'two_plot.ui'
 #
-# Created: Sun Nov 13 14:22:20 2016
-#      by: PyQt4 UI code generator 4.10.4
+# Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -33,12 +32,12 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.plot_container = QtGui.QHBoxLayout()
         self.plot_container.setObjectName(_fromUtf8("plot_container"))
-        self.plot_right = PlotWidget(self.master_container)
-        self.plot_right.setObjectName(_fromUtf8("plot_right"))
-        self.plot_container.addWidget(self.plot_right)
         self.plot_left = PlotWidget(self.master_container)
         self.plot_left.setObjectName(_fromUtf8("plot_left"))
         self.plot_container.addWidget(self.plot_left)
+        self.plot_right = PlotWidget(self.master_container)
+        self.plot_right.setObjectName(_fromUtf8("plot_right"))
+        self.plot_container.addWidget(self.plot_right)
         self.gridLayout.addLayout(self.plot_container, 0, 0, 1, 1)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
