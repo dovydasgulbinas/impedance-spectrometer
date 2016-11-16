@@ -1,7 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from Ui_MainWindow import spectro_gui 
-from basic_iterator import SineIterable
-import time
+import random
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -22,13 +21,12 @@ class DataSignals(QtCore.QObject):
     # Python specific type -- list
     value_updated = QtCore.pyqtSignal(list)
 
-
     def value_generator(self):
         # will generate event that will passed
-        si = SineIterable(0, 200)
-        for i in range(0,1000):
-            self.value_updated.emit(list(si))
-            time.sleep(0.01)
+        # it should be replace with real data stream
+        # value emiter is crucial part of the code
+        self.value_updated.emit([random.random(),random.random()]*5)
+
 
 class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
     def __init__(self):
@@ -49,7 +47,7 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         # this returns one instance of a graph plotted in left_plot
         self.graph_l0 = self.plot_left.plot()
 
-    def handle_value_updated(self, value):
+    def handle_value_updated(self, value): # you must pass value
         # plot method takes in lists!
         self.graph_l0.setData(value)
         print(value)
@@ -58,7 +56,6 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
 
     def temp_plot_always(self):
         # plot method takes in lists!
-        value = list(SineIterable(0, 200))
         self.graph_l0.setData(value)
         print(value)
         self.plot_left.setTitle(value)
@@ -71,13 +68,10 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     window = MainWindow()
     window.show()
-
-    # timer = QtCore.QTimer()
-    # # attach method that will be called as fast as possible
-    # timer.timeout.connect(window.temp_plot_always)
-    # timer.start(2000)
-
-    window.data_signals.value_generator()
+    # Implementing timed data polling
+    timer = QtCore.QTimer()
+    timer.timeout.connect(window.data_signals.value_generator)
+    timer.start(20)
     # this line is not executed
     sys.exit(app.exec_())
 
