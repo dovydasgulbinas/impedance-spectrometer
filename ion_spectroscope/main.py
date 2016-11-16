@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from base_gui import Ui_MainWindow
+from Ui_MainWindow import spectro_gui 
 from basic_iterator import SineIterable
 import time
 
@@ -30,7 +30,7 @@ class DataSignals(QtCore.QObject):
             self.value_updated.emit(list(si))
             time.sleep(0.01)
 
-class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)

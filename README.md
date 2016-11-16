@@ -23,7 +23,7 @@
 ## Installing editor tools
 ```
 apt-get install pyqt4-dev-tools
-pyuic4 -x xxx.ui -o yyy.py
+pyuic4 -x two_plot.ui -o base_gui_vx.py
 ```
 ## How you can redraw plots
 There are two ways of graphing any data in a plot:
