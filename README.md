@@ -1,8 +1,15 @@
 ## Running
 
-1. Install virtual env from file: ``
+# Win, Mac, Linux(RPI exclued)
+1. Install virtual env from file: `conda env create -f pyqtgraphev.yml`
 2. Activate env: `source activate qt4qtgraph`
 
+# Rasberry pi
+1. sudo apt-get install python3-scipy
+2. sudo apt-get install python3-pyqt4
+3. git clone https://github.com/pyqtgraph/pyqtgraph.git pyqtgraph
+4. cd pyqtgraph
+5. python3 setup.py install
 
 ## Conclusions on this lib
 
