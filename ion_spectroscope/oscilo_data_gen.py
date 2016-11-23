@@ -73,24 +73,22 @@ if scp:
 
                 # Wait for measurement to complete:
                 while not (scp.is_data_ready or scp.is_data_overflow):
-                    time.sleep(0.21)  # Qt timer can be used
+                    time.sleep(0.10)  # Qt timer can be used
 
                 if scp.is_data_overflow:
                     print('Data overflow!')
                     break
 
-                # Get data:
+                #:: Get data:
                 data = scp.get_data()
-
-                sample += len(data[0])
+                print(data[0])
 
         except Exception as e:
             print('Exception:{}'.format(e))
             sys.exit(1)
 
         else:
-            print(data)
-
+            print("data-received")
         finally:
             scp.stop()
             del scp
