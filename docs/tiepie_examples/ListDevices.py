@@ -1,0 +1,32 @@
+# ListDevices.py - for LibTiePie 0.5+
+#
+# This example prints all the available devices to the screen.
+#
+# Find more information on http://www.tiepie.com/LibTiePie .
+
+from __future__ import print_function
+import sys
+import time
+import libtiepie
+from printinfo import *
+
+# Print library info:
+print_library_info()
+
+# Search for devices:
+libtiepie.device_list.update()
+
+if len(libtiepie.device_list) > 0:
+    print()
+    print('Available devices:')
+
+    for item in libtiepie.device_list:
+        print('  Name: ' + item.name)
+        print('    Serial number: ' + str(item.serial_number))
+        print('    Available types: ' + libtiepie.device_type_str(item.types))
+
+else:
+    print('No devices found!')
+    sys.exit(1)
+
+sys.exit(0)

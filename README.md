@@ -10,6 +10,8 @@
 3. git clone https://github.com/pyqtgraph/pyqtgraph.git pyqtgraph
 4. cd pyqtgraph
 5. python3 setup.py install
+6. sudo bash -c 'echo "deb http://packages.tiepie.com/raspbian/ tiepie main" > /etc/apt/sources.list.d/tiepie.list'
+7. 
 
 ## Conclusions on this lib
 
