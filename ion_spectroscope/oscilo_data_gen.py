@@ -38,46 +38,42 @@ if scp:
 
         # TODO: How to Get infinite amount of samples
         # Sets how many samples it will take. Defined in register.
-        scp.record_length = 1000  # 1 kS
+        scp.record_length = 8 # 1 kS
 
         # Allows to enable any channel:
-        for ch in scp.channels:
+        ch = scp.channels[0]
             # Enable channel to measure it:
-            ch.enabled = True
+        ch.enabled = True
 
-            # Set range:
-            ch.range = 8  # 8 V
+        # Set range:
+        ch.range = 8  # 8 V
 
-            # Set coupling:
-            ch.coupling = libtiepie.CK_DCV  # DC Volt
+        # Set coupling:
+        ch.coupling = libtiepie.CK_DCV  # DC Volt
+    except Exception as e:
+        print("Exception: {}".format(e))
+            
+    else:
 
-        # Print oscilloscope info:
-        # scp is a class instance with representation 
+        # scp is a class instance with representation
         print_device_info(scp)
 
         # Start measurement:
         scp.start()
 
         # Generate a text file headers
-        csv_file = open('OscilloscopeStream.csv', 'w')
         try:
-            # Create a text file headers:
-            csv_file.write('Sample')
-            for i in range(len(scp.channels)):
-                csv_file.write(';Ch' + str(i + 1))
-            csv_file.write(os.linesep)
-
             # TODO: what is a block?
-            # Measure 10 blocks:
+
             print()
             sample = 0
-            for block in range(10):
-                # Print a message, to inform the user that we still do something:
-                print('Data block ' + str(block + 1))
+            for take in range(3):
+
+                print("DataBlock:".format(take))
 
                 # Wait for measurement to complete:
                 while not (scp.is_data_ready or scp.is_data_overflow):
-                    time.sleep(0.01)  # 10 ms delay, to save CPU time
+                    time.sleep(0.21)  # Qt timer can be used
 
                 if scp.is_data_overflow:
                     print('Data overflow!')
@@ -86,32 +82,23 @@ if scp:
                 # Get data:
                 data = scp.get_data()
 
-                # Output CSV data:
-                for i in range(len(data[0])):
-                    csv_file.write(str(sample + i))
-                    for j in range(len(data)):
-                        csv_file.write(';' + str(data[j][i]))
-                    csv_file.write(os.linesep)
-
                 sample += len(data[0])
 
-            print()
-            print('Data written to: ' + csv_file.name)
+        except Exception as e:
+            print('Exception:{}'.format(e))
+            sys.exit(1)
+
+        else:
+            print(data)
+
         finally:
-            csv_file.close()
+            scp.stop()
+            del scp
 
-        # Stop stream:
-        scp.stop()
-
-    except Exception as e:
-        print('Exception: ' + e.message)
-        sys.exit(1)
-
-    # Close oscilloscope:
-    del scp
 
 else:
     print('No oscilloscope available with stream measurement support!')
     sys.exit(1)
+
 
 sys.exit(0)
