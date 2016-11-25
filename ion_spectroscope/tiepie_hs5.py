@@ -1,5 +1,6 @@
 import logging
 import libtiepie
+from printinfo import *
 
 logger = logging.getLogger('TiePieClass')
 
@@ -24,11 +25,11 @@ class SpectroscopeManager:
                     raise IOError("Could initialize oscilloscope")
 
 
-    def do_block_measurment(self, sample_freq, nsamples, *args, **kwargs):
-        """Enables you to start a block measurment.
+    def setup_block_measurment(self, sample_freq, nsamples, *args, **kwargs):
+        """Sets you up for block measurment.
 
         Arguments:
-            - *args -- tuple, ((channel1, voltage1), (channel2, voltage2) ...)
+            - *args -- tuple, ((channel_id, range1, coupling1), (channel_id, range2) ...)
 
         """
 
@@ -36,17 +37,45 @@ class SpectroscopeManager:
         self.scp.sample_frequency = sample_freq  # You can use the scientific notation 1e3
         self.scp.record_length = nsamples
 
-        # All other channels must be set to False
+        for setup in args:
+            if setup[0]:
+                # channel must be enabled
+                # grabs channel object
+                ch = self.scp.channels[args.index(setup)]
+                ch.enabled = True
+                ch. range = setup[1]
+                ch.coupling = libtiepie.CK_DCV # DC Volt
 
-        enable = lambda en:
+        if kwargs is not None:
+            keys = kwargs.keys()
+            if 'info' in keys:
+                # Print oscilloscope info:
+                print_device_info(scp)
+                # add kwargs here!
 
-        map(enable , self.scp.channels)
+
+
+    def start_block_measurment(self):
+        scp.start()
+
+        # add code here!!!
 
 
 
 
 
 
+#TODO: 1. De
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
+#TODO:
 
 
 
