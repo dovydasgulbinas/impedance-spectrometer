@@ -57,15 +57,15 @@ if __name__ == "__main__":
 
     # adding osciloscope instance
 
-    scopes = SpectroscopeManager(init_generator=True)
+    scopes = SpectroscopeManager(init_gen=True)
     # attaching a handler
     scopes.set_new_data_handler(window.handle_value_updated)
     logger.info('Setting up generator')
-    scopes.setup_generator(1000, 3)
+    scopes.setup_generator(900, 7)
     logger.info('Starting generator')
     scopes.start_generator()
     logger.info('starting block measurment')
-    scopes.setup_block_measurment(1000, 100, [[0, 8]], info=True)
+    scopes.setup_block_measurment(1000, 50, [[0, 8]], info=True)
     scopes.do_block_measurment(400)
     scopes.stop_everything()
 
