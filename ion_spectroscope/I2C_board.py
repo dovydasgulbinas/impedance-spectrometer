@@ -6,9 +6,23 @@ logger = logging.getLogger('i2c_board')
 
 # Registrai
 
-bus = smbus.SMBus(1)
-address = 0x20  # I2C adresas- "i2cdetect -y 1"
-reg = 0x00
+
+
+
+class BoardController:
+
+    def __init__(self, smbus_port=1, address=0x20, reg=0x00):
+        self.bus = smbus.SMBus(smbus_port)
+        self.address = address
+        self.reg = reg
+
+    def address_resistor(self, resistor_id ,frequency_range='LF'):
+        """Takes in parameters and sets a resistor
+        :param resistor_id: integer, [1-6] for chosing a resistor
+        :param frequency_range: string, two states -- LF, HF
+        :return:
+        """
+
 
 
 # Rezistoriai
