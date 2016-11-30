@@ -1,7 +1,7 @@
 import logging
 from PyQt4 import QtCore, QtGui
 from Ui_MainWindow import spectro_gui
-from .tiepie_hs5 import SpectroscopeManager
+from tiepie_hs5 import SpectroscopeManager
 
 logger = logging.getLogger()
 
