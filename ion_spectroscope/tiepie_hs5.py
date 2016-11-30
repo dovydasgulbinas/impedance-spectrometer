@@ -77,7 +77,7 @@ class SpectroscopeManager:
                     logger.warning('Data overflow occured!')
                     break
 
-                data = self.scp.get_data
+                data = self.scp.get_data()
                 # this will call a new data handler when there is new data
                 self.new_data_handler(data)
 
@@ -93,7 +93,9 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logger.debug('Running as main')
     def test_handler(data):
-        logger.debug("Handler test data: {}".format(data))
+      logger.debug('Here is the data {}'.format(data))
+      #  for block in data:
+      #      logger.debug("block {}".format(block))
 
     scopes = SpectroscopeManager()
     scopes.set_new_data_handler(test_handler)
