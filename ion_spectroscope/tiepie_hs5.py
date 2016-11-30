@@ -45,7 +45,7 @@ class SpectroscopeManager:
 
     def setup_generator(self, frequency, amplitude, offset=0, output_on=True, info=True):
         if self.gen:
-            self.gen.signal_type = libtiepie.ST_TRIANGLE
+            self.gen.signal_type = libtiepie.ST_SINE
 
             # Set frequency:
             self.gen.frequency = frequency
