@@ -61,7 +61,7 @@ if __name__ == "__main__":
     # attaching a handler
     scopes.set_new_data_handler(window.handle_value_updated)
     logger.info('Setting up generator')
-    scopes.setup_generator()
+    scopes.setup_generator(1000, 3)
     logger.info('Starting generator')
     scopes.start_generator()
     logger.info('starting block measurment')

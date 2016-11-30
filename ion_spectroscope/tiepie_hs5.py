@@ -43,7 +43,7 @@ class SpectroscopeManager:
                 else:
                     logger.error("Could initialize generator")
 
-    def setup_generator(self, frequency, amplitude_vpp, offset=0, output_on=True, info=True):
+    def setup_generator(self, frequency, amplitude, offset=0, output_on=True, info=True):
         if self.gen:
             self.gen.signal_type = libtiepie.ST_SINE
 
@@ -51,7 +51,7 @@ class SpectroscopeManager:
             self.gen.frequency = frequency
 
             # Set amplitude:
-            self.gen.amplitude = amplitude_vpp
+            self.gen.amplitude = amplitude
 
             # Set offset:
             self.gen.offset = offset  # 0 V
