@@ -1,9 +1,10 @@
 import logging
 import time
 import libtiepie
-from .printinfo import *
+from printinfo import *
 
 logger = logging.getLogger('TiePieClass')
+logger.debug('The module has been started')
 
 
 class SpectroscopeManager:
@@ -89,11 +90,12 @@ class SpectroscopeManager:
             # make sure deletion of the object is needed
 
 if __name__ == '__main__':
-
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger.debug('Running as main')
     def test_handler(data):
         logger.debug("Handler test data: {}".format(data))
 
     scopes = SpectroscopeManager()
     scopes.set_new_data_handler(test_handler)
-    scopes.setup_block_measurment(1000, 100,(0, 8), info=True)
+    scopes.setup_block_measurment(1000, 100,[[0, 8]], info=True)
     scopes.do_block_measurment()
