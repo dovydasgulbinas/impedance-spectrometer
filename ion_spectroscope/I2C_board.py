@@ -4,25 +4,28 @@ import smbus
 logger = logging.getLogger('i2c_board')
 
 
-# Registrai
-
-
-
-
 class BoardController:
-
     def __init__(self, smbus_port=1, address=0x20, reg=0x00):
         self.bus = smbus.SMBus(smbus_port)
         self.address = address
         self.reg = reg
 
-    def address_resistor(self, resistor_id ,frequency_range='LF'):
-        """Takes in parameters and sets a resistor
+        # setting resistor registers
+        self.res_reg_HF = int('00000001', 2)  # register of resistor A in High Frequency mode
+        self.res_reg_HF_index = [
+            int('00000001', 2),
+            int('00000010', 2),
+            int('00000100', 2),
+            int('00001000', 2)
+
+        ]  # sequential index of resistor registers that activate correspondingly
+
+    def address_resistor(self, resistor_id, frequency_range='LF'):
+        """Takes in parameters and turns on a chosen resistor.
         :param resistor_id: integer, [1-6] for chosing a resistor
         :param frequency_range: string, two states -- LF, HF
         :return:
         """
-
 
 
 # Rezistoriai
@@ -311,3 +314,9 @@ filtras()  # Filters, ranging from 1 to 4.
 mode()  # 'MEAS' for measurement and 'CAL' for calibration modes.
 attenuator()  # Signal, coming from the generator, can be attenuated. Variable is either 'ON' or 'OFF'.
 gain()  # Available gains after I-V conversion are 1.7 and 6.8.
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger.debug('Running as main')
+
+    bc = BoardController()
