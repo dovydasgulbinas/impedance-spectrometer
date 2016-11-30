@@ -8,12 +8,15 @@ logger.debug('The module has been started')
 
 
 class SpectroscopeManager:
-    def __init__(self, auto_init=True):
+    def __init__(self, init_scp=True, init_gen=False):
         self.scp = None  # osciloscope object
-        if auto_init:
-            self.init_tiepie()
+        self.gen = None  # generator object
+        if init_scp:
+            self.init_scp()
+        if init_gen:
+            self.init_generator()
 
-    def init_tiepie(self):
+    def init_scp(self):
         """Adds all methods need for starting oscilloscope."""
         libtiepie.device_list.update()
 
@@ -26,6 +29,48 @@ class SpectroscopeManager:
                     break
                 else:
                     raise IOError("Could initialize oscilloscope")
+
+    def init_generator(self):
+        """Adds all methods need for starting oscilloscope."""
+        libtiepie.device_list.update()
+        # search for generator
+        for item in libtiepie.device_list:
+            if item.can_open(libtiepie.DEVICETYPE_GENERATOR):
+                self.gen = item.open_generator()
+                if self.gen:
+                    logger.info('Found a generator!')
+                    break
+                else:
+                    logger.error("Could initialize generator")
+
+    def setup_generator(self, frequency, amplitude_vpp, offset=0, output_on=True, info=True):
+        if self.gen:
+            self.gen.signal_type = libtiepie.ST_SINE
+
+            # Set frequency:
+            self.gen.frequency = frequency
+
+            # Set amplitude:
+            self.gen.amplitude = amplitude_vpp
+
+            # Set offset:
+            self.gen.offset = offset  # 0 V
+
+            # Enable output:
+            self.gen.output_on = output_on
+
+            # Print generator info:
+            if info:
+                print_device_info(self.gen)
+        else:
+            logger.error('Generator is not initialized, try running init_generator()')
+            raise IOError("Generator object not initialized")
+
+    def start_generator(self):
+        self.gen.start()
+
+    def stop_generator(self):
+        self.gen.stop()
 
     def setup_block_measurment(self, sample_freq, nsamples, setups, **kwargs):
         """Sets you up for block measurment.
@@ -86,8 +131,16 @@ class SpectroscopeManager:
 
         finally:
             self.scp.stop()
-            logger.warning('Stopping measurment')
+            logger.warning('Stopping TiePie processes')
+
             # make sure deletion of the object is needed
+
+    def stop_everything(self):
+        logger.info('Stopping all processes')
+        if self.scp:
+            self.scp.stop()
+        if self.gen:
+            self.gen.stop()
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
