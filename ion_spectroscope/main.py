@@ -1,4 +1,5 @@
 import logging
+import array
 from PyQt4 import QtCore, QtGui
 from Ui_MainWindow import spectro_gui
 from tiepie_hs5 import SpectroscopeManager
@@ -29,6 +30,8 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         # Since MainWindow class is inherited you must pass self
         self.setupUi(self)
         self.customize_left_plot()
+        # create a empty array buffer for extending 
+        self.plot1_buffer =array.array('f', [])
 
     def customize_left_plot(self):
         self.plot_left.showGrid(True, True)
@@ -39,7 +42,8 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
     def handle_value_updated(self, value):  # you must pass value
         # plot method takes in lists!
         # fixme: a hardcoded value index should be removed
-        self.graph_l0.setData(value[0])
+        self.plot1_buffer.extend(value[0])
+        self.graph_l0.setData(self.plot1_buffer)
         print(value)
         # essential line for updating
         QtGui.qApp.processEvents()  # force complete redraw for every plot
