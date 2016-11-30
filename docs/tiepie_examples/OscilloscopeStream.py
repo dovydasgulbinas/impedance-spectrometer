@@ -30,7 +30,7 @@ for item in libtiepie.device_list:
 if scp:
     try:
         # Set measure mode:
-        scp.measure_mode = libtiepie.MM_STREAM
+        scp.measure_mode = libtiepie.MM_STREAMj
 
         # Set sample frequency:
         scp.sample_frequency = 1e3  # 1 kHz
