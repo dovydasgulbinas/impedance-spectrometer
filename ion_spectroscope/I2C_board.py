@@ -9,153 +9,99 @@ class BoardController:
         self.bus = smbus.SMBus(smbus_port)
         self.address = address
         self.reg = reg
+        self.n_resistors_hf = 6
+        self.n_resistors_lf = 5
 
         # setting resistor registers
-        self.res_reg_HF = int('00000001', 2)  # register of resistor A in High Frequency mode
-        self.res_reg_HF_index = [
-            int('00000001', 2),
+        self.res_reg_hf = int('00000001', 2)  # register of resistor A in High Frequency mode
+        self.res_reg_hf_index = [
+            int('00000001', 2),  # 0
             int('00000010', 2),
             int('00000100', 2),
-            int('00001000', 2)
-
+            int('00001000', 2),  # 3
+            int('00010000', 2),
+            int('00000000', 2),  # TODO: Test me out properly #5
         ]  # sequential index of resistor registers that activate correspondingly
 
-    def address_resistor(self, resistor_id, frequency_range='LF'):
+    def read_registers(self):
+        regs = bus.read_i2c_block_data(self.address, self.reg)
+        logger.info('Red back reg. value: {}'.format(regs))
+
+    def print_bytes(self, byte1, byte2, tag):
+        logger.debug(
+            '{} resistor writen values: B1 {} | B2 {}'.format(tag, byte1, byte2))
+
+    def address_resistor_hf(self, resistor_id, read_registers=True):
         """Takes in parameters and turns on a chosen resistor.
-        :param resistor_id: integer, [1-6] for chosing a resistor
-        :param frequency_range: string, two states -- LF, HF
+        :param resistor_id: integer, [0-5] for chosing a resistor
         :return:
         """
 
+        if resistor_id in range(0, self.n_resistors_hf):
 
-# Rezistoriai
+            if resistor_id < self.n_resistors_hf - 2:  # 6 - 2 = 4
+                self.print_bytes(self.res_reg_hf, self.res_reg_hf_index[resistor_id], 'HF')
+                bus.write_i2c_block_data(
+                    self.address, self.reg, [self.res_reg_hf, self.res_reg_hf_index[resistor_id]])
 
-def resistor():
-    resistor = raw_input("Pasirinkite dazniu intervala (LF, HF): ")
-    if resistor == "HF":
-        res = raw_input("Pasirinkite rezistoriu (1-6): ")
-        if res == "1":
-            regB = int('00000001', 2)
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
-        elif res == "2":
-            regB = int('00000010', 2)
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
-        elif res == "3":
-            regB = int('00000010', 2)
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
-        elif res == "4":
-            regB = int('00001000', 2)
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
-        elif res == "5":
-            regB = int('00010000', 2)
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
-        elif res == "6":
-            regA = int('00000001', 2)
-            bus.write_i2c_block_data(address, reg, [regA])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regA: " + str(regA)
-            print
-            "regB bits not set for permanently connected resistors"
-            print
-            "Pasirinkote %r rezistoriu veikianti HF dazniu intervale. " % res
+            # last resistor is addressed differently
+            elif resistor_id == self.n_resistors_hf - 1:
+                self.print_bytes(self.res_reg_hf, 'None', 'HF')
+                bus.write_i2c_block_data(
+                    self.address, self.reg, [self.res_reg_hf])
+
+            if read_registers:
+                self.read_registers()
         else:
-            print
-            "IVConverter: Invalid resistor index specified. Value was not modified."
+            raise IndexError('You chose resistor that is not in range!')
 
-    elif resistor == "LF":
-        res = raw_input("Pasirinkite rezistoriu (7-11): ")
-        if res == "7":
-            regA = int('00000001', 2)
-            regB = int('00001000', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti LF dazniu intervale. " % res
-        elif res == "8":
-            regA = int('00000010', 2)
-            regB = int('00001000', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote %r rezistoriu veikianti LF dazniu intervale. " % res
-        elif res == "9":
-            regB = int('01001000', 2)
-            bus.write_i2c_block_data(address, reg, [regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB)
-            print
-            "Pasirinkote %r rezistoriu veikianti LF dazniu intervale. " % res
-        elif res == "10":
-            regB = int('01001000', 2)
-            bus.write_i2c_block_data(address, reg, [regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB)
-            print
-            "Pasirinkote %r rezistoriu veikianti LF dazniu intervale. " % res
-        elif res == "11":
-            regB = int('00001000', 2)
-            bus.write_i2c_block_data(address, reg, [regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB)
-            print
-            "regA bits not set for permanently connected resistors. "
-            print
-            "Pasirinkote %r rezistoriu veikianti LF dazniu intervale. " % res
+    def address_resistor_lf(self, resistor_id, read_registers=True):
+        """
+
+        :param resistor_id:
+        :param read_registers:
+        :return:
+        """
+
+        if resistor_id in range(0, self.n_resistors_lf):
+
+            if resistor_id == 6:
+                areg = int('00000001', 2)
+                breg = int('00001000', 2)
+                self.print_bytes(areg,breg,'LF')
+                bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
+            elif resistor_id == 7:
+                areg = int('00000010', 2)
+                breg = int('00001000', 2)
+                self.print_bytes(areg,breg,'LF')
+                bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
+            elif resistor_id == 8: # FIXME: Issue is most likely to be here
+                breg = int('01001000', 2)
+                self.print_bytes('None', breg, 'LF')
+                bus.write_i2c_block_data(self.address, self.reg, [breg])
+            elif resistor_id == 9:
+                breg = int('01001000', 2)
+                self.print_bytes('None', breg, 'LF')
+                bus.write_i2c_block_data(self.address, self.reg, [breg])
+            elif resistor_id == 10:
+                breg = int('00001000', 2)
+                self.print_bytes('None', breg, 'LF')
+                bus.write_i2c_block_data(self.address, self.reg, [breg])
+
+            if read_registers:
+                self.read_registers()
         else:
-            print
-            "IVConverter: Invalid resistor index specified. Value was not modified. "
-    else:
-        print
-        "IVConverter: Range can only be 'HF' or 'LF'. Value was not modified. "
+            raise IndexError('You chose resistor that is not in range!')
+
+
+
+
+
+
+        # Rezistoriai
+
+
+
 
 
 # Filtrai
