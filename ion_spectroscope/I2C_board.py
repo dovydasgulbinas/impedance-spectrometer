@@ -11,6 +11,7 @@ class BoardController:
         self.reg = reg
         self.n_resistors_hf = 6
         self.n_resistors_lf = 5
+        self.n_filters = 4
 
         # setting resistor registers
         self.res_reg_hf = int('00000001', 2)  # register of resistor A in High Frequency mode
@@ -21,7 +22,14 @@ class BoardController:
             int('00001000', 2),  # 3
             int('00010000', 2),
             int('00000000', 2),  # TODO: Test me out properly #5
-        ]  # sequential index of resistor registers that activate correspondingly
+        ]  # sequential index of resistor registers that activate correspondinglyi
+
+        self.filters = [
+            int('01010000', 2),
+            int('01000000', 2),
+            int('00010000', 2),
+            None
+        ]
 
     def read_registers(self):
         regs = bus.read_i2c_block_data(self.address, self.reg)
@@ -31,7 +39,7 @@ class BoardController:
         logger.debug(
             '{} resistor writen values: B1 {} | B2 {}'.format(tag, byte1, byte2))
 
-    def address_resistor_hf(self, resistor_id, read_registers=True):
+    def control_resistor_hf(self, resistor_id, read_registers=True):
         """Takes in parameters and turns on a chosen resistor.
         :param resistor_id: integer, [0-5] for chosing a resistor
         :return:
@@ -55,7 +63,7 @@ class BoardController:
         else:
             raise IndexError('You chose resistor that is not in range!')
 
-    def address_resistor_lf(self, resistor_id, read_registers=True):
+    def control_resistor_lf(self, resistor_id, read_registers=True):
         """
 
         :param resistor_id:
@@ -79,7 +87,7 @@ class BoardController:
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [breg])
-            elif resistor_id == 9:
+            elif resistor_id == 9: # FIXME: ERROR? because match with above?
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [breg])
@@ -93,12 +101,25 @@ class BoardController:
         else:
             raise IndexError('You chose resistor that is not in range!')
 
+    def control_filter(self, filter_id, read_registers=True):
+        logger.debug('in control_filter, filter_id {}'.format(filter_id))
+
+        if filter_id in range(0, self.n_filters):
+
+            if filter_id < self.n_filters -2:
+                filter_reg = self.filters[filter_id]
+                self.print_bytes(filter_reg, 'None', 'FILTER |')
+                bus.write_i2c_block_data(self.address, self.reg, [filter_reg])
+
+            elif filter_id == self.n_filters - 1:
+                self.print_bytes('None', 'None', 'FILTER |')
+
+        if read_registers:
+            self.read_registers()
 
 
-
-
-
-        # Rezistoriai
+        else:
+            raise IndexError('You chose filter that is not in range!')
 
 
 
