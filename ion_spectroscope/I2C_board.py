@@ -22,7 +22,7 @@ class BoardController:
             int('00001000', 2),  # 3
             int('00010000', 2),
             int('00000000', 2),  # TODO: Test me out properly #5
-        ]  # sequential index of resistor registers that activate correspondinglyi
+        ]  # sequential index of resistor registers that activate correspondingly
 
         self.filters = [
             int('01010000', 2),
@@ -33,20 +33,24 @@ class BoardController:
 
         self.calibration_registers = {
             "calibrate_hf": int('10000000', 2),
-            "calibrate_lf": int('10000000', 2), # FIXME: calib registers overlap
+            "calibrate_lf": int('10000000', 2),  # FIXME: calib registers overlap
         }
         self.measurement_registers = {
             "measure_lf_rega": int('00000100', 2),
             "measure_lf_regb": int('10000000', 2),
 
             "measure_hf_rega": int('00000100', 2),
-            "measure_hf_regb": int('00000000', 2), # FIXME: Missing regb value
+            "measure_hf_regb": int('00000000', 2),  # FIXME: Missing regb value
         }
 
         self.attenuator_registers = {
             "turn_on": int('00100000', 2),
             "turn_off": int('00000000', 2),
 
+        }
+        self.gain_registers = {
+            "gain=6.8": int('00001000', 2),
+            "gain=1.7": int('00000000', 2),  # fixme: find the right gain register value
         }
 
     def read_registers(self):
@@ -58,10 +62,11 @@ class BoardController:
             '{} resistor writen values: B1 {} | B2 {}'.format(tag, byte1, byte2))
 
     def control_resistor_hf(self, resistor_id, read_registers=True):
-        """Takes in parameters and turns on a chosen resistor.
-        :param resistor_id: integer, [0-5] for chosing a resistor
-        :return:
-        """
+       """Takes in parameters and turns on a chosen resistor.
+       :param resistor_id: turns on hf resistor in range [0-5]
+       :param read_registers:  optional methods for checking if register value changed
+       :return: void
+       """
 
         if resistor_id in range(0, self.n_resistors_hf):
 
@@ -82,34 +87,33 @@ class BoardController:
             raise IndexError('You chose resistor that is not in range!')
 
     def control_resistor_lf(self, resistor_id, read_registers=True):
-        """
-
-        :param resistor_id:
-        :param read_registers:
-        :return:
-        """
+        """Takes in parameters and turns on a chosen resistor.
+         :param resistor_id: turns on lf resistor in range [0-4]
+         :param read_registers:  optional methods for checking if register value changed
+         :return: void
+         """
 
         if resistor_id in range(0, self.n_resistors_lf):
 
-            if resistor_id == 6:
+            if resistor_id == 0:
                 areg = int('00000001', 2)
                 breg = int('00001000', 2)
-                self.print_bytes(areg,breg,'LF')
+                self.print_bytes(areg, breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
-            elif resistor_id == 7:
+            elif resistor_id == 1:
                 areg = int('00000010', 2)
                 breg = int('00001000', 2)
-                self.print_bytes(areg,breg,'LF')
+                self.print_bytes(areg, breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
-            elif resistor_id == 8: # FIXME: Issue is most likely to be here
+            elif resistor_id == 2:  # FIXME: Issue is most likely to be here
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [breg])
-            elif resistor_id == 9: # FIXME: ERROR? because match with above?
+            elif resistor_id == 3:  # FIXME: ERROR? because match with above?
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [breg])
-            elif resistor_id == 10:
+            elif resistor_id == 4:
                 breg = int('00001000', 2)
                 self.print_bytes('None', breg, 'LF')
                 bus.write_i2c_block_data(self.address, self.reg, [breg])
@@ -124,7 +128,7 @@ class BoardController:
 
         if filter_id in range(0, self.n_filters):
 
-            if filter_id < self.n_filters -2:
+            if filter_id < self.n_filters - 2:
                 filter_reg = self.filters[filter_id]
                 self.print_bytes(filter_reg, 'None', 'FILTER |')
                 bus.write_i2c_block_data(self.address, self.reg, [filter_reg])
@@ -185,40 +189,22 @@ class BoardController:
         if read_registers:
             self.read_registers()
 
+    def set_gain_to17(self, read_registers=True):
+        logger.debug('in set_gain_to17')
+        gain = self.gain_registers["gain=1.7"]  # fixme: will not work probably
+        bus.write_i2c_block_data(self.address, self.reg, [gain])
 
+        if read_registers:
+            self.read_registers()
 
+    def set_gain_to68(self, read_registers=True):
+        logger.debug('in set_gain_to68')
+        gain = self.gain_registers["gain=6.8"]
+        bus.write_i2c_block_data(self.address, self.reg, [gain])
 
-# Gain
+        if read_registers:
+            self.read_registers()
 
-def gain():
-    gain = raw_input("Pasirinkite gain veikimo rezima (1.7/6.8): ")
-    if gain == "6.8":
-        regA = int('00001000', 2)
-        bus.write_i2c_block_data(address, reg, [regA])
-        print
-        "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-        print
-        "regA: " + str(regA)
-        print
-        "Pasirinkote %r gain veikimo rezima. " % gain
-    elif gain == "1.7":
-        print
-        "regA bit is not set for 1.7"
-        print
-        "Pasirinkote %r gain veikimo rezima. " % gain
-    else:
-        print
-        "IVConverter: Invalid gain specified. Value was not modified. "
-
-
-# Properties
-
-resistor()  # Resistors, ranging from 1 to 11. Also determines range variable.
-filtras()  # Filters, ranging from 1 to 4.
-# setrange()             # Range is determined by the chosen resistor.
-mode()  # 'MEAS' for measurement and 'CAL' for calibration modes.
-attenuator()  # Signal, coming from the generator, can be attenuated. Variable is either 'ON' or 'OFF'.
-gain()  # Available gains after I-V conversion are 1.7 and 6.8.
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
