@@ -43,6 +43,12 @@ class BoardController:
             "measure_hf_regb": int('00000000', 2), # FIXME: Missing regb value
         }
 
+        self.attenuator_registers = {
+            "turn_on": int('00100000', 2),
+            "turn_off": int('00000000', 2),
+
+        }
+
     def read_registers(self):
         regs = bus.read_i2c_block_data(self.address, self.reg)
         logger.info('Red back reg. value: {}'.format(regs))
@@ -163,28 +169,23 @@ class BoardController:
         if read_registers:
             self.read_registers()
 
+    def turn_attenuator_on(self, read_registers=True):
+        logger.debug('in turn attenuator_on')
+        on = self.attenuator_registers["turn_on"]
+        bus.write_i2c_block_data(self.address, self.reg, [on])
 
-# Ateniuatorius
+        if read_registers:
+            self.read_registers()
 
-def attenuator():
-    attenuator = raw_input("Pasirinkite ateniuatoriaus veikimo rezima (ON/OFF): ")
-    if attenuator == "ON":
-        regA = int('00100000', 2)
-        bus.write_i2c_block_data(address, reg, [regA])
-        print
-        "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-        print
-        "regA: " + str(regA)
-        print
-        "Pasirinkote %r ateniuatoriaus veikimo rezima" % attenuator
-    elif attenuator == "OFF":
-        print
-        "bit is not set for 'OFF'"
-        print
-        "Pasirinkote %r ateniuatoriaus veikimo rezima" % attenuator
-    else:
-        print
-        "IVConverter: Attenuator can only be 'ON' or 'OFF'. Value was not modified. "
+    def turn_attenuator_off(self, read_registers=True):
+        logger.debug('in turn attenuator_off')
+        off = self.attenuator_registers["turn_off"]
+        bus.write_i2c_block_data(self.address, self.reg, [off])
+
+        if read_registers:
+            self.read_registers()
+
+
 
 
 # Gain
