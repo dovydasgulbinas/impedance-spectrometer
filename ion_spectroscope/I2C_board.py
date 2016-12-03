@@ -31,6 +31,18 @@ class BoardController:
             None
         ]
 
+        self.calibration_registers = {
+            "calibrate_hf": int('10000000', 2),
+            "calibrate_lf": int('10000000', 2), # FIXME: calib registers overlap
+        }
+        self.measurement_registers = {
+            "measure_lf_rega": int('00000100', 2),
+            "measure_lf_regb": int('10000000', 2),
+
+            "measure_hf_rega": int('00000100', 2),
+            "measure_hf_regb": int('00000000', 2), # FIXME: Missing regb value
+        }
+
     def read_registers(self):
         regs = bus.read_i2c_block_data(self.address, self.reg)
         logger.info('Red back reg. value: {}'.format(regs))
@@ -116,115 +128,40 @@ class BoardController:
 
         if read_registers:
             self.read_registers()
-
-
         else:
             raise IndexError('You chose filter that is not in range!')
 
+    def enter_calibration_mode_hf(self, read_registers=True):
+        logger.debug('in enter_calibration_mode_hf')
+        bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_hf"]])
 
+        if read_registers:
+            self.read_registers()
 
+    def enter_calibration_mode_lf(self, read_registers=True):
+        logger.debug('in enter_calibration_mode_lf')
+        bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_lf"]])
 
+        if read_registers:
+            self.read_registers()
 
-# Filtrai
+    def enter_measurement_mode_hf(self, read_registers):
+        logger.debug('in enter_measurement_mode_hf')
+        rega = self.measurement_registers["measure_hf_rega"]
+        regb = self.measurement_registers["measure_hf_regb"]  # FIXME: Make sure its called propery
+        bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
 
-def filtras():
-    filtras = raw_input("Pasirinkite filtra (1-4): ")
-    if filtras == "1":
-        regA = int('01010000', 2)
-        bus.write_i2c_block_data(address, reg, [regA])
-        print
-        "Registro ID : " + str(bus.read_i2c_block_data(address, reg))
-        print
-        "regA: " + str(regA)
-        print
-        "Pasirinkote %r filtra. " % filtras
-    elif filtras == "2":
-        regA = int('01000000', 2)
-        bus.write_i2c_block_data(address, reg, [regA])
-        print
-        "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-        print
-        "regA: " + str(regA)
-        print
-        "Pasirinkote %r filtra. " % filtras
-    elif filtras == "3":
-        regA = int('00010000', 2)
-        bus.write_i2c_block_data(address, reg, [regA])
-        print
-        "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-        print
-        "regA: " + str(regA)
-        print
-        "Pasirinkote %r filtra. " % filtras
-    elif filtras == "4":
-        print
-        "no bits set for position 4. "
-        print
-        "Pasirinkote %r filtra. " % filtras
-    else:
-        print
-        "IVConverter: Invalid filter index specified. Value was not modified. "
+        if read_registers:
+            self.read_registers()
 
+    def enter_measurement_mode_lf(self, read_registers):
+        logger.debug('in enter_measurement_mode_lf')
+        rega = self.measurement_registers["measure_lf_rega"]
+        regb = self.measurement_registers["measure_lf_regb"]
+        bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
 
-# Matavimas/ Kalibravimas
-
-def mode():
-    mode = raw_input("Pasirinkite veikimo rezima (MEAS/CAL): ")
-    if mode == "MEAS":
-        MEAS = raw_input("Pasirinkite dazniu intervala (LF, HF): ")
-        if MEAS == "LF":
-            regA = int('00000100', 2)
-            regB = int('10000000', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB), "regA: " + str(regA)
-            print
-            "Pasirinkote matavimo rezima veikianti %r dazniu intervale. " % MEAS
-
-        elif MEAS == "HF":
-            regA = int('10000100', 2)
-            bus.write_i2c_block_data(address, reg, [regA, regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regA: " + str(regA)
-            print
-            "Pasirinkote matavimo rezima veikianti %r dazniu intervale. " % MEAS
-        else:
-            print
-            "IVConverter: Range can only be 'HF' or 'LF'. Value was not modified. "
-
-    elif mode == "CAL":
-        CAL = raw_input("Pasirinkite dazniu intervala (LF, HF): ")
-        if CAL == "LF":
-            regB = int('10000000', 2)
-            bus.write_i2c_block_data(address, reg, [regB])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regB: " + str(regB)
-            print
-            "Pasirinkote kalibravimo rezima veikianti %r dazniu intervale. " % CAL
-
-        elif CAL == "HF":
-            regA = int('10000000', 2)
-            bus.write_i2c_block_data(address, reg, [regA])
-            print
-            "Registro ID: " + str(bus.read_i2c_block_data(address, reg))
-            print
-            "regA: " + str(regA)
-            print
-            "regB bits are not set for HF measurement"
-            print
-            "Pasirinkote kalibravimo rezima veikianti %r dazniu intervale. " % CAL
-        else:
-            print
-            "IVConverter: Range can only be 'HF' or 'LF'. Value was not modified. "
-    else:
-        print
-        "IVConverter: Mode can only be 'CAL' or 'MEAS'. Value was not modified. "
+        if read_registers:
+            self.read_registers()
 
 
 # Ateniuatorius
