@@ -44,3 +44,5 @@ There are two ways of graphing any data in a plot:
 [redraw_events](http://stackoverflow.com/questions/20873259/pyqt-how-to-dynamically-update-widget-property-on-outer-variable-value-change)
 
 [documentation](http://www.pyqtgraph.org/documentation/graphicsItems/plotitem.html#pyqtgraph.PlotItem.showGrid)
+
+ssh pi@158.129.164.225

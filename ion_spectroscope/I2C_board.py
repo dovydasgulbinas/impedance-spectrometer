@@ -73,7 +73,7 @@ class BoardController:
 
 
     def read_registers(self):
-        regs = bus.read_i2c_block_data(self.address, self.reg)
+        regs = self.bus.read_i2c_block_data(self.address, self.reg)
         logger.info('Red back reg. value: {}'.format(regs))
 
     def print_bytes(self, byte1, byte2, tag):
@@ -91,13 +91,13 @@ class BoardController:
 
             if resistor_id < self.n_resistors_hf - 2:  # 6 - 2 = 4
                 self.print_bytes(self.res_reg_hf, self.res_reg_hf_index[resistor_id], 'HF')
-                bus.write_i2c_block_data(
+                self.bus.write_i2c_block_data(
                     self.address, self.reg, [self.res_reg_hf, self.res_reg_hf_index[resistor_id]])
 
             # last resistor is addressed differently
             elif resistor_id == self.n_resistors_hf - 1:
                 self.print_bytes(self.res_reg_hf, 'None', 'HF')
-                bus.write_i2c_block_data(
+                self.bus.write_i2c_block_data(
                     self.address, self.reg, [self.res_reg_hf])
 
             if read_registers:
@@ -118,24 +118,24 @@ class BoardController:
                 areg = int('00000001', 2)
                 breg = int('00001000', 2)
                 self.print_bytes(areg, breg, 'LF')
-                bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
             elif resistor_id == 1:
                 areg = int('00000010', 2)
                 breg = int('00001000', 2)
                 self.print_bytes(areg, breg, 'LF')
-                bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [areg, breg])
             elif resistor_id == 2:  # FIXME: Issue is most likely to be here
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
-                bus.write_i2c_block_data(self.address, self.reg, [breg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [breg])
             elif resistor_id == 3:  # FIXME: ERROR? because match with above?
                 breg = int('01001000', 2)
                 self.print_bytes('None', breg, 'LF')
-                bus.write_i2c_block_data(self.address, self.reg, [breg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [breg])
             elif resistor_id == 4:
                 breg = int('00001000', 2)
                 self.print_bytes('None', breg, 'LF')
-                bus.write_i2c_block_data(self.address, self.reg, [breg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [breg])
 
             if read_registers:
                 self.read_registers()
@@ -150,7 +150,7 @@ class BoardController:
             if filter_id < self.n_filters - 2:
                 filter_reg = self.filters[filter_id]
                 self.print_bytes(filter_reg, 'None', 'FILTER |')
-                bus.write_i2c_block_data(self.address, self.reg, [filter_reg])
+                self.bus.write_i2c_block_data(self.address, self.reg, [filter_reg])
 
             elif filter_id == self.n_filters - 1:
                 self.print_bytes('None', 'None', 'FILTER |')
@@ -162,14 +162,14 @@ class BoardController:
 
     def enter_calibration_mode_hf(self, read_registers=True):
         logger.debug('in enter_calibration_mode_hf')
-        bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_hf"]])
+        self.bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_hf"]])
 
         if read_registers:
             self.read_registers()
 
     def enter_calibration_mode_lf(self, read_registers=True):
         logger.debug('in enter_calibration_mode_lf')
-        bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_lf"]])
+        self.bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_lf"]])
 
         if read_registers:
             self.read_registers()
@@ -178,7 +178,7 @@ class BoardController:
         logger.debug('in enter_measurement_mode_hf')
         rega = self.measurement_registers["measure_hf_rega"]
         regb = self.measurement_registers["measure_hf_regb"]  # FIXME: Make sure its called propery
-        bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
+        self.bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
 
         if read_registers:
             self.read_registers()
@@ -187,7 +187,7 @@ class BoardController:
         logger.debug('in enter_measurement_mode_lf')
         rega = self.measurement_registers["measure_lf_rega"]
         regb = self.measurement_registers["measure_lf_regb"]
-        bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
+        self.bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
 
         if read_registers:
             self.read_registers()
@@ -195,7 +195,7 @@ class BoardController:
     def turn_attenuator_on(self, read_registers=True):
         logger.debug('in turn attenuator_on')
         on = self.attenuator_registers["turn_on"]
-        bus.write_i2c_block_data(self.address, self.reg, [on])
+        self.bus.write_i2c_block_data(self.address, self.reg, [on])
 
         if read_registers:
             self.read_registers()
@@ -203,7 +203,7 @@ class BoardController:
     def turn_attenuator_off(self, read_registers=True):
         logger.debug('in turn attenuator_off')
         off = self.attenuator_registers["turn_off"]
-        bus.write_i2c_block_data(self.address, self.reg, [off])
+        self.bus.write_i2c_block_data(self.address, self.reg, [off])
 
         if read_registers:
             self.read_registers()
@@ -211,7 +211,7 @@ class BoardController:
     def set_gain_to17(self, read_registers=True):
         logger.debug('in set_gain_to17')
         gain = self.gain_registers["gain=1.7"]  # fixme: will not work probably
-        bus.write_i2c_block_data(self.address, self.reg, [gain])
+        self.bus.write_i2c_block_data(self.address, self.reg, [gain])
 
         if read_registers:
             self.read_registers()
@@ -219,7 +219,7 @@ class BoardController:
     def set_gain_to68(self, read_registers=True):
         logger.debug('in set_gain_to68')
         gain = self.gain_registers["gain=6.8"]
-        bus.write_i2c_block_data(self.address, self.reg, [gain])
+        self.bus.write_i2c_block_data(self.address, self.reg, [gain])
 
         if read_registers:
             self.read_registers()
