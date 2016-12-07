@@ -54,6 +54,7 @@ class BoardController:
             "gain=6.8": int('00001000', 2),
             "gain=1.7": int('00000000', 2),  # fixme: find the right gain register value
         }
+        self._resistors()
 
     def _resistors(self):
         """This method should only be called once in the constructor."""
@@ -86,7 +87,7 @@ class BoardController:
        :return: void
        """
 
-        if resistor_id in range(0, self.n_resistors_hf):
+       if resistor_id in range(0, self.n_resistors_hf):
 
             if resistor_id < self.n_resistors_hf - 2:  # 6 - 2 = 4
                 self.print_bytes(self.res_reg_hf, self.res_reg_hf_index[resistor_id], 'HF')
@@ -227,5 +228,9 @@ class BoardController:
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logger.debug('Running as main')
-
+    import time
     bc = BoardController()
+
+    for i in range(0, 6):
+        bc.control_resistor_hf(i)
+        time.sleep(1)
