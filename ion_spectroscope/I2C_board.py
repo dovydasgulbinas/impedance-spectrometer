@@ -102,7 +102,7 @@ class BoardController:
 
             if read_registers:
                 self.read_registers()
-        else:
+       else:
             raise IndexError('You chose resistor that is not in range!')
 
     def control_resistor_lf(self, resistor_id, read_registers=True):
