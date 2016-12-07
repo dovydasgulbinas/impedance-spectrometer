@@ -5,7 +5,7 @@ logger = logging.getLogger('i2c_board')
 
 
 class BoardController:
-    def __init__(self, smbus_port=1, address=0x20, reg=0x00):
+    def __init__(self, smbus_port=1, address=0x21, reg=0x00):
         self.bus = smbus.SMBus(smbus_port)
         self.address = address
         self.reg = reg
