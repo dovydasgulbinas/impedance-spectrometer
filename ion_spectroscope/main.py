@@ -1,7 +1,7 @@
 import logging
 import array
 from PyQt4 import QtCore, QtGui
-from Ui_MainWindow import v3_export as spectro_gui
+from Ui_MainWindow import v5_export as spectro_gui
 from tiepie_hs5 import SpectroscopeManager
 
 logger = logging.getLogger()
@@ -30,6 +30,7 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         # Since MainWindow class is inherited you must pass self
         self.setupUi(self)
         self.customize_left_plot()
+        self.customize_right_plot()
         # create a empty array buffer for extending 
         self.plot1_buffer =array.array('f', [])
 
@@ -38,6 +39,12 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.plot_left.setTitle('Left is not left ?')
         # this returns one instance of a graph plotted in left_plot
         self.graph_l0 = self.plot_left.plot()
+
+    def customize_right_plot(self):
+        self.plot_right.showGrid(True, True)
+        self.plot_right.setTitle('Left is not RIGHT? ?')
+        # this returns one instance of a graph plotted in left_plot
+        self.graph_l0 = self.plot_right.plot()
 
     def handle_value_updated(self, value):  # you must pass value
         # plot method takes in lists!

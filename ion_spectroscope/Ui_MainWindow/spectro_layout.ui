@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1168</width>
+    <width>1183</width>
     <height>777</height>
    </rect>
   </property>
@@ -754,10 +754,10 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="PlotWidget" name="widget_6" native="true">
+          <widget class="PlotWidget" name="plot_bottom" native="true">
            <property name="minimumSize">
             <size>
-             <width>400</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -958,7 +958,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1168</width>
+     <width>1183</width>
      <height>27</height>
     </rect>
    </property>
