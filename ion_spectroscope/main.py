@@ -1,7 +1,7 @@
 import logging
 import array
 from PyQt4 import QtCore, QtGui
-from Ui_MainWindow import spectro_gui
+from Ui_MainWindow import v3_export as spectro_gui
 from tiepie_hs5 import SpectroscopeManager
 
 logger = logging.getLogger()
@@ -61,17 +61,17 @@ if __name__ == "__main__":
 
     # adding osciloscope instance
 
-    scopes = SpectroscopeManager(init_gen=True)
-    # attaching a handler
-    scopes.set_new_data_handler(window.handle_value_updated)
-    logger.info('Setting up generator')
-    scopes.setup_generator(900, 7)
-    logger.info('Starting generator')
-    scopes.start_generator()
-    logger.info('starting block measurment')
-    scopes.setup_block_measurment(1000, 50, [[0, 8]], info=True)
-    scopes.do_block_measurment(400)
-    scopes.stop_everything()
+    # scopes = SpectroscopeManager(init_gen=True)
+    # # attaching a handler
+    # scopes.set_new_data_handler(window.handle_value_updated)
+    # logger.info('Setting up generator')
+    # scopes.setup_generator(900, 7)
+    # logger.info('Starting generator')
+    # scopes.start_generator()
+    # logger.info('starting block measurment')
+    # scopes.setup_block_measurment(1000, 50, [[0, 8]], info=True)
+    # scopes.do_block_measurment(400)
+    # scopes.stop_everything()
 
     # this line is not executed
     sys.exit(app.exec_())

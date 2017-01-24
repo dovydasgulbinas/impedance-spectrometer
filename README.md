@@ -25,6 +25,7 @@
 ## Installing editor tools
 ```
 apt-get install pyqt4-dev-tools
+/home/hermes/anaconda3/envs/qt4qtgraph/bin/python
 pyuic4 -x two_plot.ui -o base_gui_vx.py
 ```
 ## How you can redraw plots

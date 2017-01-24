@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1305</width>
-    <height>775</height>
+    <width>1168</width>
+    <height>777</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,29 @@
      <layout class="QHBoxLayout" name="plot_container">
       <item>
        <widget class="PlotWidget" name="plot_left" native="true">
-        <zorder></zorder>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>350</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>1677215</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
-       <widget class="PlotWidget" name="plot_right" native="true"/>
+       <widget class="PlotWidget" name="plot_right" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>350</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -31,88 +49,255 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QGroupBox" name="g0_diffAmp">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>125</width>
+          <height>350</height>
+         </size>
+        </property>
         <property name="title">
          <string>Dif. Amplifier</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QGroupBox" name="groupBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>123</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="title">
             <string>Outputs</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QLabel" name="label">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_dif_amp">
               <property name="text">
-               <string>TextLabel</string>
+               <string>Dif. Amp.</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QFontComboBox" name="fontComboBox_3"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>TextLabel</string>
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QFontComboBox" name="cbox_dif_amp">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QFontComboBox" name="fontComboBox_2"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_pos_amp">
               <property name="text">
-               <string>TextLabel</string>
+               <string>Pos. Amp.</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QFontComboBox" name="fontComboBox">
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QFontComboBox" name="cbox_pos_amp">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_neg_amp">
+              <property name="text">
+               <string>Neg. Amp.</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QFontComboBox" name="cbox_neg_amp">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
             </item>
            </layout>
           </widget>
          </item>
-         <item>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QGroupBox" name="groupBox_2">
+           <property name="maximumSize">
+            <size>
+             <width>123</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="title">
-            <string>DELETE</string>
+            <string/>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_4">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_gain">
               <property name="text">
-               <string>TextLabel</string>
+               <string>Gain</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QFontComboBox" name="cbox_gain">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_pos_input">
+              <property name="text">
+               <string>Pos. Input</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QFontComboBox" name="fontComboBox_6"/>
+             <widget class="QFontComboBox" name="cbox_pos_input">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
             </item>
-            <item>
-             <widget class="QLabel" name="label_5">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="lab_neg_input">
               <property name="text">
-               <string>TextLabel</string>
+               <string>Neg. Input</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QFontComboBox" name="fontComboBox_4"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>TextLabel</string>
+             <widget class="QFontComboBox" name="cbox_neg_input">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
-            </item>
-            <item>
-             <widget class="QFontComboBox" name="fontComboBox_5"/>
             </item>
            </layout>
           </widget>
@@ -122,18 +307,72 @@
       </item>
       <item>
        <widget class="QWidget" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>360</width>
+          <height>350</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>350</height>
+         </size>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QGroupBox" name="groupBox_3">
+          <widget class="QGroupBox" name="main_control">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>999</width>
+             <height>100</height>
+            </size>
+           </property>
            <property name="title">
             <string>Main  Control</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
             <item>
              <widget class="QWidget" name="widget_2" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <widget class="QLabel" name="label_7">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="margin">
+                <number>2</number>
+               </property>
+               <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                <widget class="QLabel" name="lab_control">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -152,16 +391,16 @@
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="fontComboBox_7">
+                <widget class="QFontComboBox" name="cbox_control">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>80</width>
+                   <width>20</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -175,24 +414,55 @@
             </item>
             <item>
              <widget class="QWidget" name="widget_3" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item>
-                <widget class="QLabel" name="label_8">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="margin">
+                <number>2</number>
+               </property>
+               <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                <widget class="QLabel" name="lab_meas_rate">
                  <property name="text">
                   <string>Meas. Rate</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="fontComboBox_8"/>
+                <widget class="QFontComboBox" name="cbox_measrate">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignHCenter">
              <widget class="QWidget" name="widget_4" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="margin">
+                <number>2</number>
+               </property>
+               <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                 <widget class="QLabel" name="label_9">
                  <property name="text">
                   <string>Ref. Channel</string>
@@ -200,7 +470,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="fontComboBox_9"/>
+                <widget class="QFontComboBox" name="cbox_ref_channel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -210,48 +487,94 @@
          </item>
          <item>
           <widget class="QGroupBox" name="groupBox_4">
+           <property name="maximumSize">
+            <size>
+             <width>999</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="title">
             <string>Osciloscope</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
-            <item>
-             <widget class="QFrame" name="frame">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
+            <item alignment="Qt::AlignBottom">
              <widget class="QWidget" name="widget_5" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>155</height>
+               </size>
+              </property>
               <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <property name="margin">
+                <number>2</number>
+               </property>
                <item>
                 <widget class="QGroupBox" name="groupBox_5">
                  <property name="title">
                   <string>Ch1</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_10">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Range</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_10"/>
+                   <widget class="QFontComboBox" name="cbox_c1_range">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_11">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Coupling</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_11"/>
+                   <widget class="QFontComboBox" name="cbox_c2_coupling">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -262,25 +585,45 @@
                   <string>Ch2</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_12">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Range</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_12"/>
+                   <widget class="QFontComboBox" name="cbox_c2_range">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_13">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Coupling</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_13"/>
+                   <widget class="QFontComboBox" name="cbox_c2_coupling_2">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -291,54 +634,94 @@
                   <string>Ch3</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_11">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_14">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Range</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_14"/>
+                   <widget class="QFontComboBox" name="cbox_c3_range">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_15">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Coupling</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_15"/>
+                   <widget class="QFontComboBox" name="cbox_c3_coupling">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
                </item>
-               <item>
+               <item alignment="Qt::AlignHCenter">
                 <widget class="QGroupBox" name="groupBox_8">
                  <property name="title">
                   <string>Ch4</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_12">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_16">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Range</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_16"/>
+                   <widget class="QFontComboBox" name="cbox_c4_range">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_17">
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>Coupling</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="fontComboBox_17"/>
+                   <widget class="QFontComboBox" name="cbox_c4_coupling">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -354,51 +737,94 @@
       </item>
       <item>
        <widget class="QGroupBox" name="g2_graph">
+        <property name="minimumSize">
+         <size>
+          <width>350</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>9999</width>
+          <height>350</height>
+         </size>
+        </property>
         <property name="title">
          <string>Graph</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="PlotWidget" name="widget_6" native="true"/>
+          <widget class="PlotWidget" name="widget_6" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="g3_graphControls">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>350</height>
+         </size>
+        </property>
         <property name="title">
          <string>Graph Controls</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_13">
-         <item>
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
           <widget class="QGroupBox" name="groupBox_9">
            <property name="title">
             <string>Show</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
+            <property name="margin">
+             <number>4</number>
+            </property>
+            <property name="spacing">
+             <number>4</number>
+            </property>
             <item row="1" column="0">
-             <widget class="QCheckBox" name="checkBox_3">
+             <widget class="QCheckBox" name="tbox_u1">
               <property name="text">
                <string>U1</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QCheckBox" name="checkBox_2">
+             <widget class="QCheckBox" name="tbox_u2">
               <property name="text">
                <string>U2</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="tbox_u3">
               <property name="text">
                <string>U3</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QCheckBox" name="checkBox_4">
+             <widget class="QCheckBox" name="tbox_u4">
               <property name="text">
                <string>U4</string>
               </property>
@@ -408,16 +834,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="lab_fi1">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Fi1 = </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="lab_m1">
            <property name="text">
-            <string>TextLabel</string>
+            <string>M1 =</string>
            </property>
           </widget>
          </item>
@@ -429,16 +855,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_20">
+          <widget class="QLabel" name="lab_fi2">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Fi2 =</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_21">
+          <widget class="QLabel" name="lab_m2">
            <property name="text">
-            <string>TextLabel</string>
+            <string>M2 = </string>
            </property>
           </widget>
          </item>
@@ -450,16 +876,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_22">
+          <widget class="QLabel" name="lab_fi3">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Fi3 = </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_23">
+          <widget class="QLabel" name="lab_m3">
            <property name="text">
-            <string>TextLabel</string>
+            <string>M3 = </string>
            </property>
           </widget>
          </item>
@@ -471,16 +897,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_24">
+          <widget class="QLabel" name="lab_fi4">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Fi4 = </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_25">
+          <widget class="QLabel" name="lab_m4">
            <property name="text">
-            <string>TextLabel</string>
+            <string>M4 = </string>
            </property>
           </widget>
          </item>
@@ -494,15 +920,21 @@
          <item>
           <widget class="QWidget" name="widget_7" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="but_start">
               <property name="text">
                <string>Start</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_5">
+             <widget class="QCheckBox" name="tbox_cont">
               <property name="text">
                <string>Cont.</string>
               </property>
@@ -526,7 +958,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1305</width>
+     <width>1168</width>
      <height>27</height>
     </rect>
    </property>
