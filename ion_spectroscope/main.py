@@ -56,12 +56,149 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         QtGui.qApp.processEvents()  # force complete redraw for every plot
 
     def populate_combo_boxes(self):
-        self.cbox_dif_amp.addItems(["Java", "C++", "Python"])
-        self.cbox_dif_amp.currentIndexChanged.connect(self.trial_choice)
+        # todo: add an argument which is list of lists and auto populate this
+        self.populate_dif_amp()
+        self.populate_pos_amp()
+        self.populate_neg_amp()
 
-    def trial_choice(self, text):
-        logger.debug('you called: {}'.format(text))
+        self.populate_gain()
+        self.populate_pos_input()
+        self.populate_neg_input()
 
+        self.populate_control()
+        self.populate_measrate()
+        self.populate_ref_channel()
+
+        self.populate_c1_range()
+        self.populate_c1_coupling()
+        self.populate_c2_range()
+        self.populate_c2_coupling()
+        self.populate_c3_range()
+        self.populate_c3_coupling()
+        self.populate_c4_range()
+        self.populate_c4_coupling()
+
+        # COMBOBOX HANDLER SECTION
+
+    def populate_dif_amp(self, values=("ON", "OFF")):
+        self.cbox_dif_amp.addItems(values)
+        self.cbox_dif_amp.currentIndexChanged.connect(self.action_dif_amp)
+
+    def action_dif_amp(self, index):
+        logger.debug('action_dif_amp: {}'.format(index))
+
+    def populate_pos_amp(self, values=("ON", "OFF")):
+        self.cbox_pos_amp.addItems(values)
+        self.cbox_pos_amp.currentIndexChanged.connect(self.action_pos_amp)
+
+    def action_pos_amp(self, index):
+        logger.debug('action_pos_amp: {}'.format(index))
+
+    def populate_neg_amp(self, values=("ON", "OFF")):
+        self.cbox_neg_amp.addItems(values)
+        self.cbox_neg_amp.currentIndexChanged.connect(self.action_neg_amp)
+
+    def action_neg_amp(self, index):
+        logger.debug('action_neg_amp: {}'.format(index))
+
+    def populate_gain(self, values=("K = 6.8", "K=99.99")):
+        self.cbox_gain.addItems(values)
+        self.cbox_gain.currentIndexChanged.connect(self.action_gain)
+
+    def action_gain(self, index):
+        logger.debug('action_gain: {}'.format(index))
+
+    def populate_pos_input(self, values=("GND", "XXX")):
+        self.cbox_pos_input.addItems(values)
+        self.cbox_pos_input.currentIndexChanged.connect(self.action_pos_input)
+
+    def action_pos_input(self, index):
+        logger.debug('action_pos_input: {}'.format(index))
+
+    def populate_neg_input(self, values=("GND", "YYY")):
+        self.cbox_neg_input.addItems(values)
+        self.cbox_neg_input.currentIndexChanged.connect(self.action_neg_input)
+
+    def action_neg_input(self, index):
+        logger.debug('action_neg_input: {}'.format(index))
+
+    def populate_control(self, values=("Appl.", "JJJ")):
+        self.cbox_control.addItems(values)
+        self.cbox_control.currentIndexChanged.connect(self.action_control)
+
+    def action_control(self, index):
+        logger.debug('action_control: {}'.format(index))
+
+    def populate_measrate(self, values=("Fast", "JJJ")):
+        self.cbox_measrate.addItems(values)
+        self.cbox_measrate.currentIndexChanged.connect(self.action_measrate)
+
+    def action_measrate(self, index):
+        logger.debug('action_measrate: {}'.format(index))
+
+    def populate_ref_channel(self, values=("Ch4", "JJJ")):
+        self.cbox_ref_channel.addItems(values)
+        self.cbox_ref_channel.currentIndexChanged.connect(self.action_ref_channel)
+
+    def action_ref_channel(self, index):
+        logger.debug('action_ref_channel: {}'.format(index))
+
+    def populate_c1_range(self, values=("0.2", "JJJ")):
+        self.cbox_c1_range.addItems(values)
+        self.cbox_c1_range.currentIndexChanged.connect(self.action_c1_range)
+
+    def action_c1_range(self, index):
+        logger.debug('action_c1_range: {}'.format(index))
+
+    def populate_c1_coupling(self, values=("ACV", "JJJ")):
+        self.cbox_c1_coupling.addItems(values)
+        self.cbox_c1_coupling.currentIndexChanged.connect(self.action_c1_coupling)
+
+    def action_c1_coupling(self, index):
+        logger.debug('action_c1_coupling: {}'.format(index))
+
+    def populate_c2_range(self, values=("0.2", "JJJ")):
+        self.cbox_c2_range.addItems(values)
+        self.cbox_c2_range.currentIndexChanged.connect(self.action_c2_range)
+
+    def action_c2_range(self, index):
+        logger.debug('action_c2_range: {}'.format(index))
+
+    def populate_c2_coupling(self, values=("ACV", "JJJ")):
+        self.cbox_c2_coupling.addItems(values)
+        self.cbox_c2_coupling.currentIndexChanged.connect(self.action_c2_coupling)
+
+    def action_c2_coupling(self, index):
+        logger.debug('action_c2_coupling: {}'.format(index))
+
+    def populate_c3_range(self, values=("0.2", "JJJ")):
+        self.cbox_c3_range.addItems(values)
+        self.cbox_c3_range.currentIndexChanged.connect(self.action_c3_range)
+
+    def action_c3_range(self, index):
+        logger.debug('action_c3_range: {}'.format(index))
+
+    def populate_c3_coupling(self, values=("ACV", "JJJ")):
+        self.cbox_c3_coupling.addItems(values)
+        self.cbox_c3_coupling.currentIndexChanged.connect(self.action_c3_coupling)
+
+    def action_c3_coupling(self, index):
+        logger.debug('action_c3_coupling: {}'.format(index))
+
+    def populate_c4_range(self, values=("0.2", "JJJ")):
+        self.cbox_c4_range.addItems(values)
+        self.cbox_c4_range.currentIndexChanged.connect(self.action_c4_range)
+
+    def action_c4_range(self, index):
+        logger.debug('action_c4_range: {}'.format(index))
+
+    def populate_c4_coupling(self, values=("ACV", "JJJ")):
+        self.cbox_c4_coupling.addItems(values)
+        self.cbox_c4_coupling.currentIndexChanged.connect(self.action_c4_coupling)
+
+    def action_c4_coupling(self, index):
+        logger.debug('action_c4_coupling: {}'.format(index))
+    
 if __name__ == "__main__":
     import sys
 
@@ -73,10 +210,6 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     logger.debug('Style: {}'.format(window.style().objectName()))
-
-
-
-
 
     # adding osciloscope instance
 
