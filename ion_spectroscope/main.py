@@ -1,7 +1,7 @@
 import logging
 import array
 from PyQt4 import QtCore, QtGui
-from Ui_MainWindow import v5_export as spectro_gui
+from Ui_MainWindow import v7_export as spectro_gui
 from tiepie_hs5 import SpectroscopeManager
 
 logger = logging.getLogger()
@@ -11,7 +11,6 @@ try:
 except AttributeError:
     def _fromUtf8(s):
         return s
-
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
 
@@ -31,6 +30,7 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.setupUi(self)
         self.customize_left_plot()
         self.customize_right_plot()
+        self.populate_combo_boxes()
         # create a empty array buffer for extending 
         self.plot1_buffer =array.array('f', [])
 
@@ -55,6 +55,12 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         # essential line for updating
         QtGui.qApp.processEvents()  # force complete redraw for every plot
 
+    def populate_combo_boxes(self):
+        self.cbox_dif_amp.addItems(["Java", "C++", "Python"])
+        self.cbox_dif_amp.currentIndexChanged.connect(self.trial_choice)
+
+    def trial_choice(self, text):
+        logger.debug('you called: {}'.format(text))
 
 if __name__ == "__main__":
     import sys
@@ -63,8 +69,14 @@ if __name__ == "__main__":
     logger.debug('Running as main')
 
     app = QtGui.QApplication(sys.argv)
+    app.setStyle(QtGui.QStyleFactory.create("Windows"))
     window = MainWindow()
     window.show()
+    logger.debug('Style: {}'.format(window.style().objectName()))
+
+
+
+
 
     # adding osciloscope instance
 

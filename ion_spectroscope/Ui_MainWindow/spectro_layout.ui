@@ -108,27 +108,8 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-             <widget class="QFontComboBox" name="cbox_dif_amp">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+            <item>
+             <widget class="QComboBox" name="cbox_dif_amp"/>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="lab_pos_amp">
@@ -137,27 +118,8 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-             <widget class="QFontComboBox" name="cbox_pos_amp">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+            <item>
+             <widget class="QComboBox" name="cbox_pos_amp"/>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="lab_neg_amp">
@@ -166,30 +128,8 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-             <widget class="QFontComboBox" name="cbox_neg_amp">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+            <item>
+             <widget class="QComboBox" name="cbox_neg_amp"/>
             </item>
            </layout>
           </widget>
@@ -219,27 +159,8 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-             <widget class="QFontComboBox" name="cbox_gain">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+            <item>
+             <widget class="QComboBox" name="cbox_gain"/>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="lab_pos_input">
@@ -249,26 +170,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QFontComboBox" name="cbox_pos_input">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+             <widget class="QComboBox" name="cbox_pos_input"/>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="lab_neg_input">
@@ -278,26 +180,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QFontComboBox" name="cbox_neg_input">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
+             <widget class="QComboBox" name="cbox_neg_input"/>
             </item>
            </layout>
           </widget>
@@ -359,7 +242,7 @@
             <item>
              <widget class="QWidget" name="widget_2" native="true">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -374,7 +257,7 @@
                <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                 <widget class="QLabel" name="lab_control">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -391,23 +274,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="cbox_control">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="frame">
-                  <bool>true</bool>
-                 </property>
-                </widget>
+                <widget class="QComboBox" name="cbox_control"/>
                </item>
               </layout>
              </widget>
@@ -415,7 +282,7 @@
             <item>
              <widget class="QWidget" name="widget_3" native="true">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -435,22 +302,15 @@
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="cbox_measrate">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
+                <widget class="QComboBox" name="cbox_measrate"/>
                </item>
               </layout>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter">
+            <item>
              <widget class="QWidget" name="widget_4" native="true">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -470,14 +330,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="cbox_ref_channel">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
+                <widget class="QComboBox" name="cbox_ref_channel"/>
                </item>
               </layout>
              </widget>
@@ -538,26 +391,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c1_range">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>16777215</height>
-                     </size>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c1_range"/>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_11">
@@ -567,14 +401,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c2_coupling">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c1_coupling"/>
                   </item>
                  </layout>
                 </widget>
@@ -599,14 +426,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c2_range">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c2_range"/>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_13">
@@ -616,14 +436,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c2_coupling_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c2_coupling"/>
                   </item>
                  </layout>
                 </widget>
@@ -648,14 +461,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c3_range">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c3_range"/>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_15">
@@ -665,14 +471,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c3_coupling">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c3_coupling"/>
                   </item>
                  </layout>
                 </widget>
@@ -697,14 +496,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c4_range">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c4_range"/>
                   </item>
                   <item>
                    <widget class="QLabel" name="label_17">
@@ -714,14 +506,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFontComboBox" name="cbox_c4_coupling">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <widget class="QComboBox" name="cbox_c4_coupling"/>
                   </item>
                  </layout>
                 </widget>
