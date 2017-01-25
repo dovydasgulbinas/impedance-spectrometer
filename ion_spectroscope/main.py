@@ -31,8 +31,10 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.customize_left_plot()
         self.customize_right_plot()
         self.populate_combo_boxes()
+        self.init_checkboxes()
+        self.init_buttons()
         # create a empty array buffer for extending 
-        self.plot1_buffer =array.array('f', [])
+        self.plot1_buffer = array.array('f', [])
 
     def customize_left_plot(self):
         self.plot_left.showGrid(True, True)
@@ -77,6 +79,18 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.populate_c3_coupling()
         self.populate_c4_range()
         self.populate_c4_coupling()
+
+    def init_checkboxes(self):
+        # attach checkbox handlers
+        self.tbox_u1.stateChanged.connect(self.action_u1_ticked)
+        self.tbox_u2.stateChanged.connect(self.action_u2_ticked)
+        self.tbox_u3.stateChanged.connect(self.action_u3_ticked)
+        self.tbox_u4.stateChanged.connect(self.action_u4_ticked)
+
+        self.tbox_cont.stateChanged.connect(self.action_cont_ticked)
+
+    def init_buttons(self):
+        self.but_start.clicked.connect(self.action_start_clicked)
 
         # COMBOBOX HANDLER SECTION
 
@@ -198,11 +212,74 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
 
     def action_c4_coupling(self, index):
         logger.debug('action_c4_coupling: {}'.format(index))
-    
+
+        # CHECKBOX EVENTS
+
+    def action_c1_ticked(self, state):
+        logger.debug('action_c1_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('c1 has been checked: {}'.format(state))
+
+        else:
+            logger.debug('c1 has been un-checked: {}'.format(state))
+
+    def action_u1_ticked(self, state):
+        logger.debug('action_u1_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('been checked: {}'.format(state))
+
+        else:
+            logger.debug('been un-checked: {}'.format(state))
+
+    def action_u2_ticked(self, state):
+        logger.debug('action_u2_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('been checked: {}'.format(state))
+
+        else:
+            logger.debug('been un-checked: {}'.format(state))
+
+    def action_u3_ticked(self, state):
+        logger.debug('action_u3_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('been checked: {}'.format(state))
+
+        else:
+            logger.debug('been un-checked: {}'.format(state))
+
+    def action_u4_ticked(self, state):
+        logger.debug('action_u4_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('been checked: {}'.format(state))
+
+        else:
+            logger.debug('been un-checked: {}'.format(state))
+
+    def action_cont_ticked(self, state):
+        logger.debug('action_cont_ticked: {}'.format(state))
+
+        if state == QtCore.Qt.Checked:
+            logger.debug('been checked: {}'.format(state))
+
+        else:
+            logger.debug('been un-checked: {}'.format(state))
+
+    def action_start_clicked(self, state):
+        logger.debug('action_start_clicked: {}'.format(state))
+
+
+
+
 if __name__ == "__main__":
     import sys
 
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     logger.debug('Running as main')
 
     app = QtGui.QApplication(sys.argv)
