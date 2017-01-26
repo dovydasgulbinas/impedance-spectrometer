@@ -4,6 +4,8 @@ from PyQt4 import QtCore, QtGui
 from Ui_MainWindow import v7_export as spectro_gui
 from tiepie_hs5 import SpectroscopeManager
 
+from board_values import resistors
+
 logger = logging.getLogger()
 
 try:
@@ -63,7 +65,7 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.populate_pos_amp()
         self.populate_neg_amp()
 
-        self.populate_gain()
+        self.populate_gain(values=resistors['labels'])
         self.populate_pos_input()
         self.populate_neg_input()
 
@@ -271,8 +273,6 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
 
     def action_start_clicked(self, state):
         logger.debug('action_start_clicked: {}'.format(state))
-
-
 
 
 if __name__ == "__main__":

@@ -16,7 +16,8 @@ class BoardController:
         self.resistors = self._resistors()
 
         # setting resistor registers
-        self.res_reg_hf = int('00000001', 2)  # register of resistor A in High Frequency mode
+        self.res_reg_hf = int('00000001',
+                              2)  # register of resistor A in High Frequency mode
         self.res_reg_hf_index = [
             int('00000001', 2),  # 0
             int('00000010', 2),
@@ -56,21 +57,25 @@ class BoardController:
         }
         self._resistors()
 
+    @staticmethod
     def _resistors(self):
         """This method should only be called once in the constructor."""
 
         r = {
             "register_pairs": [[], [], [], [], [], [], [], [], [], [], []],
-            "real_value": [250, 1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6, 240e6],
-            "complex_value": [250,1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6, 240e6],
-            "labels": ['250  om ', '1,00 kom', '4,00 kom', '16,0 kom', '64,0 kom', '256  kom', '1,00 Mom', '4,00 Mom', '16,0 Mom' ,  '64,0 Mom', '256  Mom'],
-            "max_frequency": [2.2e6, 2.2e6, 2.2e6, 2.2e6, .512e6, .128e6, 32e3, 8e3, 2e3, 500, 125],
+            "real_value": [250, 1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6,
+                           240e6],
+            "complex_value": [250, 1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6,
+                              240e6],
+            "labels": ['250  om ', '1,00 kom', '4,00 kom', '16,0 kom', '64,0 kom',
+                       '256  kom', '1,00 Mom', '4,00 Mom', '16,0 Mom', '64,0 Mom',
+                       '256  Mom'],
+            "max_frequency": [2.2e6, 2.2e6, 2.2e6, 2.2e6, .512e6, .128e6, 32e3, 8e3, 2e3,
+                              500, 125],
             "hf_resistor_range": range(0, 6),
             "lf_resistor_range": range(6, 11),
         }
         return r
-
-
 
     def read_registers(self):
         regs = self.bus.read_i2c_block_data(self.address, self.reg)
@@ -81,18 +86,20 @@ class BoardController:
             '{} resistor writen values: B1 {} | B2 {}'.format(tag, byte1, byte2))
 
     def control_resistor_hf(self, resistor_id, read_registers=True):
-       """Takes in parameters and turns on a chosen resistor.
-       :param resistor_id: turns on hf resistor in range [0-5]
-       :param read_registers:  optional methods for checking if register value changed
-       :return: void
-       """
+        """Takes in parameters and turns on a chosen resistor.
+        :param resistor_id: turns on hf resistor in range [0-5]
+        :param read_registers:  optional methods for checking if register value changed
+        :return: void
+        """
 
-       if resistor_id in range(0, self.n_resistors_hf):
+        if resistor_id in range(0, self.n_resistors_hf):
 
             if resistor_id < self.n_resistors_hf - 2:  # 6 - 2 = 4
-                self.print_bytes(self.res_reg_hf, self.res_reg_hf_index[resistor_id], 'HF')
+                self.print_bytes(self.res_reg_hf, self.res_reg_hf_index[resistor_id],
+                                 'HF')
                 self.bus.write_i2c_block_data(
-                    self.address, self.reg, [self.res_reg_hf, self.res_reg_hf_index[resistor_id]])
+                    self.address, self.reg,
+                    [self.res_reg_hf, self.res_reg_hf_index[resistor_id]])
 
             # last resistor is addressed differently
             elif resistor_id == self.n_resistors_hf - 1:
@@ -102,7 +109,7 @@ class BoardController:
 
             if read_registers:
                 self.read_registers()
-       else:
+        else:
             raise IndexError('You chose resistor that is not in range!')
 
     def control_resistor_lf(self, resistor_id, read_registers=True):
@@ -162,14 +169,16 @@ class BoardController:
 
     def enter_calibration_mode_hf(self, read_registers=True):
         logger.debug('in enter_calibration_mode_hf')
-        self.bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_hf"]])
+        self.bus.write_i2c_block_data(self.address, self.reg,
+                                      [self.calibration_registers["calibrate_hf"]])
 
         if read_registers:
             self.read_registers()
 
     def enter_calibration_mode_lf(self, read_registers=True):
         logger.debug('in enter_calibration_mode_lf')
-        self.bus.write_i2c_block_data(self.address, self.reg, [self.calibration_registers["calibrate_lf"]])
+        self.bus.write_i2c_block_data(self.address, self.reg,
+                                      [self.calibration_registers["calibrate_lf"]])
 
         if read_registers:
             self.read_registers()
@@ -177,7 +186,8 @@ class BoardController:
     def enter_measurement_mode_hf(self, read_registers):
         logger.debug('in enter_measurement_mode_hf')
         rega = self.measurement_registers["measure_hf_rega"]
-        regb = self.measurement_registers["measure_hf_regb"]  # FIXME: Make sure its called propery
+        regb = self.measurement_registers[
+            "measure_hf_regb"]  # FIXME: Make sure its called propery
         self.bus.write_i2c_block_data(self.address, self.reg, [rega, regb])
 
         if read_registers:
@@ -226,9 +236,11 @@ class BoardController:
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     logger.debug('Running as main')
     import time
+
     bc = BoardController()
 
     for i in range(0, 6):

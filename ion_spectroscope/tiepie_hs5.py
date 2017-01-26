@@ -150,5 +150,5 @@ if __name__ == '__main__':
 
     scopes = SpectroscopeManager()
     scopes.set_new_data_handler(test_handler)
-    scopes.setup_block_measurment(1000, 100,[[0, 8]], info=True)
+    scopes.setup_block_measurment(1000, 100, [[0, 8]], info=True)
     scopes.do_block_measurment()
