@@ -6,7 +6,7 @@ print "Labas, "
 # Registrai
 
 bus = smbus.SMBus(1)
-address = 0x20       #I2C adresas- "i2cdetect -y 1"
+address = 0x21       #I2C adresas- "i2cdetect -y 1"
 reg = 0x00
 
 # Rezistoriai
