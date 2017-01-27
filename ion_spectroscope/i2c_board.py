@@ -1,5 +1,6 @@
 import logging
 import smbus
+from board_values import resistors
 
 logger = logging.getLogger('i2c_board')
 
@@ -13,7 +14,7 @@ class BoardController:
         self.n_resistors_lf = 5
         self.n_filters = 4
 
-        self.resistors = self._resistors()
+        self.resistors = resistors
 
         # setting resistor registers
         self.res_reg_hf = int('00000001',
@@ -55,31 +56,19 @@ class BoardController:
             "gain=6.8": int('00001000', 2),
             "gain=1.7": int('00000000', 2),  # fixme: find the right gain register value
         }
-        self._resistors()
 
-    @staticmethod
-    def _resistors(self):
-        """This method should only be called once in the constructor."""
 
-        r = {
-            "register_pairs": [[], [], [], [], [], [], [], [], [], [], []],
-            "real_value": [250, 1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6,
-                           240e6],
-            "complex_value": [250, 1e3, 4e3, 1.6e4, 64e3, 250e3, 1e6, 4e6, 16e6, 64e6,
-                              240e6],
-            "labels": ['250  om ', '1,00 kom', '4,00 kom', '16,0 kom', '64,0 kom',
-                       '256  kom', '1,00 Mom', '4,00 Mom', '16,0 Mom', '64,0 Mom',
-                       '256  Mom'],
-            "max_frequency": [2.2e6, 2.2e6, 2.2e6, 2.2e6, .512e6, .128e6, 32e3, 8e3, 2e3,
-                              500, 125],
-            "hf_resistor_range": range(0, 6),
-            "lf_resistor_range": range(6, 11),
-        }
-        return r
 
     def read_registers(self):
         regs = self.bus.read_i2c_block_data(self.address, self.reg)
         logger.info('Red back reg. value: {}'.format(regs))
+
+        """write_i2c_block_data(addr, cmd, vals)
+        Block Write transaction.
+        int addr,char cmd,long[]
+        http://raspberrypi.stackexchange.com/questions/8469/meaning-of-cmd-param-in-write-i2c-block-data
+        """
+
 
     def print_bytes(self, byte1, byte2, tag):
         logger.debug(
