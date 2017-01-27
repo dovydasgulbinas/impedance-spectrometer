@@ -76,7 +76,7 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
         self.populate_c1_range(oscilloscope['ui_ch1_range'])
         self.populate_c1_coupling(oscilloscope['ui_ch1_coupling'])
         self.populate_c2_range(oscilloscope['ui_ch2_range'])
-    self.populate_c2_coupling(oscilloscope['ui_ch2_coupling'])
+        self.populate_c2_coupling(oscilloscope['ui_ch2_coupling'])
         self.populate_c3_range(oscilloscope['ui_ch3_range'])
         self.populate_c3_coupling(oscilloscope['ui_ch3_coupling'])
         self.populate_c4_range(oscilloscope['ui_ch4_range'])
