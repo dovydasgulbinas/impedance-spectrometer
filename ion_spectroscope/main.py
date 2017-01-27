@@ -4,7 +4,7 @@ from PyQt4 import QtCore, QtGui
 from Ui_MainWindow import v7_export as spectro_gui
 from tiepie_hs5 import SpectroscopeManager
 
-from board_values import resistors
+from board_values import *
 
 logger = logging.getLogger()
 
@@ -61,26 +61,26 @@ class MainWindow(QtGui.QMainWindow, spectro_gui.Ui_MainWindow):
 
     def populate_combo_boxes(self):
         # todo: add an argument which is list of lists and auto populate this
-        self.populate_dif_amp()
-        self.populate_pos_amp()
-        self.populate_neg_amp()
+        self.populate_dif_amp(dif_amps['ui_dif_amp'])
+        self.populate_pos_amp(dif_amps['ui_pos_amp'])
+        self.populate_neg_amp(dif_amps['ui_neg_amp'])
 
-        self.populate_gain(values=resistors['labels'])
-        self.populate_pos_input()
-        self.populate_neg_input()
+        self.populate_gain(dif_amps['ui_gain'])
+        self.populate_pos_input(dif_amps['ui_pos_input'])
+        self.populate_neg_input(dif_amps['ui_neg_input'])
 
-        self.populate_control()
-        self.populate_measrate()
-        self.populate_ref_channel()
+        self.populate_control(main_control['ui_control'])
+        self.populate_measrate(main_control['ui_meas_rate'])
+        self.populate_ref_channel(main_control['ui_ref_channel'])
 
-        self.populate_c1_range()
-        self.populate_c1_coupling()
-        self.populate_c2_range()
-        self.populate_c2_coupling()
-        self.populate_c3_range()
-        self.populate_c3_coupling()
-        self.populate_c4_range()
-        self.populate_c4_coupling()
+        self.populate_c1_range(oscilloscope['ui_ch1_range'])
+        self.populate_c1_coupling(oscilloscope['ui_ch1_coupling'])
+        self.populate_c2_range(oscilloscope['ui_ch2_range'])
+    self.populate_c2_coupling(oscilloscope['ui_ch2_coupling'])
+        self.populate_c3_range(oscilloscope['ui_ch3_range'])
+        self.populate_c3_coupling(oscilloscope['ui_ch3_coupling'])
+        self.populate_c4_range(oscilloscope['ui_ch4_range'])
+        self.populate_c4_coupling(oscilloscope['ui_ch4_coupling'])
 
     def init_checkboxes(self):
         # attach checkbox handlers

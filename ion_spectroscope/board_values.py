@@ -9,3 +9,31 @@ resistors = {
     "hf_resistor_range": range(0, 6),
     "lf_resistor_range": range(6, 11),
 }
+
+dif_amps = {
+    "ui_dif_amp": ["ON", "OFF"],
+    "ui_pos_amp": ["ON", "OFF"],
+    "ui_neg_amp": ["ON", "OFF"],
+    "ui_gain": ["K=6.8", "K=1.7"],
+    "reg_gains":  [int('00001000', 2), int('00000000', 2)],
+    "ui_pos_input": ["GND", "Vcc"],
+    "ui_neg_input": ["GND", "Vcc"],
+}
+
+main_control = {
+    "ui_control": ["GUI", "Appl."],
+    "ui_meas_rate": ["Fast", "", ""],
+    "ui_ref_channel": ["Ch1", "Ch2", "Ch3", "Ch4"]
+
+}
+
+oscilloscope = {
+    "ui_ch1_range": ["0.2", "xxx?"],
+    "ui_ch1_coupling": ["ACV", "xxx?"],
+    "ui_ch2_range": ["0.2", "xxx?"],
+    "ui_ch2_coupling": ["ACV", "xxx?"],
+    "ui_ch3_range": ["0.2", "xxx?"],
+    "ui_ch3_coupling": ["ACV", "xxx?"],
+    "ui_ch4_range": ["0.2", "xxx?"],
+    "ui_ch4_coupling": ["ACV", "xxx?"],
+}
